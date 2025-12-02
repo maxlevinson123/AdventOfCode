@@ -10,23 +10,39 @@ public class AdventTemplate {
         ArrayList<String> fileData = getFileData("src/data");
 
         // go through the list line by line
-        int a = 0;
+        int a = 50;
+        int countPartOne = 0;
+        int countPartTwo = 0;
         for (int i = 0; i < fileData.size(); i++) {
             String current = fileData.get(i);
             System.out.println("Processing line: " + current);
-            if (current.substring(0,1).equals("L")) {
-                a -= Integer.parseInt(current.substring(1));
+
+            int currentNumber = Integer.parseInt(current.substring(1));
+            String direction = current.substring(0, 1);
+
+            for (int j = 0; j < currentNumber; j++) {
+                if (direction.equals("L")) {
+                    a--;
+                }
+                if (direction.equals("R")) {
+                    a ++;
+                }
+                if (a < 0) {
+                    a = 99;
+                }
+                if (a > 99) {
+                    a = 0;
+                }
+                if (a == 0) {
+                    countPartTwo++;
+                }
             }
-            if (current.substring(0,1).equals("L")) {
-                a += Integer.parseInt(current.substring(1));
-            }
-            if (a >= 100) {
-                a -= 100;
-            }
-            if (a < 0) {
-                
+            if (a == 0) {
+                countPartOne ++;
             }
         }
+        System.out.println(countPartOne);
+        System.out.println(countPartTwo);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
