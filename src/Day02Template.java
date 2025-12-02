@@ -23,7 +23,7 @@ public class Day02Template {
         long partOneAnswer = 0;
 
         for (Long p : productIDs) {
-            if (isValidProductID(p)) {
+            if (!isValidProductID(p)) {
                 partOneAnswer += p;
             }
 
@@ -34,7 +34,7 @@ public class Day02Template {
 
     public static boolean isValidProductID(long productID) {
         String pID = productID + "";
-        if (productID %2 == 0) {
+        if (pID.length() %2 == 0) {
             if ((pID.substring(0, pID.length()/2)).equals(pID.substring(pID.length()/2))) {
                 return false;
             }
