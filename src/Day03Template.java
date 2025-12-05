@@ -19,27 +19,22 @@ public class Day03Template {
 
     // COMPLETE THIS METHOD!
     public static int getLargestCombination(String batteries) {
-        int firstDigit = 0;
-        int firstDigitPlace = 0;
-        int secondDigit = 0;
-        int secondDigitPlace = 0;
+        int firstDigit = -1;
+        int secondDigit = -1;
+        int fullNumber = -1;
+        int maximum = -1;
+
         for (int i = 0; i < batteries.length(); i++) {
-            if (Integer.parseInt(batteries.substring(i, i + 1)) > firstDigit) {
-                firstDigit = Integer.parseInt(batteries.substring(i, i + 1));
-                firstDigitPlace = i;
+            firstDigit = Integer.parseInt(batteries.substring(i, i + 1));
+            for (int j = i + 1; j < batteries.length(); j++) {
+                secondDigit = Integer.parseInt(batteries.substring(j, j + 1));
+                fullNumber = Integer.parseInt((firstDigit + "") + (secondDigit + ""));
+                if (fullNumber > maximum) {
+                    maximum = fullNumber;
+                }
             }
         }
-        String newString = batteries.substring(0,firstDigitPlace) + batteries.substring(firstDigitPlace + 1);
-        for (int i = 0; i < newString.length(); i++) {
-            if (Integer.parseInt(newString.substring(i, i + 1)) > firstDigit) {
-                secondDigit = Integer.parseInt(newString.substring(i, i + 1));
-                secondDigitPlace = i;
-            }
-        }
-        if (firstDigitPlace <= secondDigitPlace) {
-            return Integer.parseInt((firstDigit + "") + (secondDigit + ""));
-        }
-        return Integer.parseInt((secondDigit + "") + (firstDigitPlace + ""));
+        return maximum;
     }
 
 
